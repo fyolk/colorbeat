@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ColorBeat_BG.ogg-139ae744fbac8846b1712d068a1c154c.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/ColorBeat_BG.ogg"
+dest_files=[ "res://.import/ColorBeat_BG.ogg-139ae744fbac8846b1712d068a1c154c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
