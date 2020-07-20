@@ -1,29 +1,23 @@
 extends Node2D
 
 # Constants
-const GRID_SIZE: = 32
 const TOTAL_COLORS: = 4
 
 # Enums
 enum { LEFT, RIGHT }
-enum { RED, GREEN, BLUE, YELLOW }
+
+# PackedScenes
+onready var shot_scene: = preload("res://Environment/Shot.tscn")
 
 # Nodes
 onready var tween: = $Tween
 onready var player: = $AnimationPlayer
 onready var sprite: = $Sprite
+onready var muzzle: = $Muzzle
 
 # Controls
 var hand: int = LEFT
-var color: int = YELLOW
-
-# Properties
-var colors: = {
-	RED: Color("#f47c7c"),
-	GREEN: Color("#a1de93"),
-	BLUE: Color("#70a1d7"),
-	YELLOW: Color("#f7f48b")
-}
+var color: int = Env.YELLOW
 
 func _ready() -> void:
 	swap_color(RIGHT)
@@ -49,11 +43,11 @@ func move(dir: int) -> void:
 
 	match dir:
 		LEFT:
-			player.play("MoveRight")
+			player.play("MoveLeft")
 			animate_movement(LEFT)
 
 		RIGHT:
-			player.play("MoveLeft")
+			player.play("MoveRight")
 			animate_movement(RIGHT)
 
 func animate_movement(dir: int):
@@ -63,7 +57,7 @@ func animate_movement(dir: int):
 		RIGHT: modifier = 1.0
 	
 	var destination: = Vector2(
-		position.x + (GRID_SIZE * modifier),
+		position.x + (Env.GRID_SIZE * modifier),
 		position.y
 	)
 
@@ -72,15 +66,18 @@ func animate_movement(dir: int):
 		"position",
 		position,
 		destination,
-		0.4,
-		Tween.TRANS_BACK,
-		Tween.EASE_IN_OUT
+		0.1,
+		Tween.TRANS_EXPO,
+		Tween.EASE_OUT
 	)
 	tween.start()
 
 func shoot() -> void:
 	player.play("ShootLeft" if hand == LEFT else "ShootRight")
 	hand = RIGHT if hand == LEFT else LEFT
+	var shot: = Util.instantiate(shot_scene)
+	shot.call_deferred("setup", color)
+	shot.global_position = muzzle.global_position
 
 func swap_color(dir: int) -> void:
 	var next_color: int
@@ -94,8 +91,8 @@ func swap_color(dir: int) -> void:
 		sprite,
 		"modulate",
 		sprite.modulate,
-		colors[color],
-		0.5,
+		Env.Colors[color],
+		0.2,
 		Tween.TRANS_CUBIC,
 		Tween.EASE_IN_OUT
 	)
