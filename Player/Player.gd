@@ -62,16 +62,7 @@ func animate_movement(dir: int):
 		position.y
 	)
 
-	move_tween.interpolate_property(
-		self,
-		"position",
-		position,
-		destination,
-		0.2,
-		Tween.TRANS_EXPO,
-		Tween.EASE_OUT
-	)
-	move_tween.start()
+	position = destination
 
 func shoot() -> void:
 	player.play("ShootLeft" if hand == LEFT else "ShootRight")

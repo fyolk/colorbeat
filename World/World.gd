@@ -11,9 +11,11 @@ func _ready() -> void:
 #	Engine.time_scale = 0.5
 
 # Debug Barriers
-#func _process(delta: float) -> void:
-#	if Input.is_action_just_pressed("ui_accept"):
-#		Env.Lanes += 2g
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		Env.Lanes += 2
+		Env.Power += 1
+		Env.BlockToSpawn += 1
 
 func _on_Timer_timeout() -> void:
 	Events.emit_signal("fall")

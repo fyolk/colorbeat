@@ -29,17 +29,20 @@ func spawn() -> void:
 	var blocks_instantiated: = []
 
 	while blocks_instantiated.size() < Env.BlockToSpawn:
-		var block: = Util.instantiate(block_scene, self)
 		var random_pos: Vector2 = Util.random_pick(available_positions)
 
 		if not blocks_instantiated.has(random_pos):
 			blocks_instantiated.append(random_pos)
-			block.position = random_pos
-			block.call_deferred(
-				"setup",
-				randi() % Env.Colors.size(),
-				randi() % Env.Power + 1
-			)
+			instantiate_block(random_pos)
+
+func instantiate_block(pos: Vector2) -> void:
+	var block: = Util.instantiate(block_scene, self)
+	block.position = pos
+	block.call_deferred(
+		"setup",
+		randi() % Env.Colors.size(),
+		randi() % Env.Power + 1
+	)
 
 func calc_offset() -> void:
 	offset = (Env.MAX_LANES - Env.Lanes) / 2 * Env.GRID_SIZE
@@ -52,6 +55,6 @@ func update_available_positions() -> void:
 			0.0
 		))
 
-func _on_Events_lane_change(lanes: int) -> void:
+func _on_Events_lane_change(_lanes: int) -> void:
 	calc_offset()
 	update_available_positions()

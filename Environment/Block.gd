@@ -16,16 +16,19 @@ onready var power_label: = $PowerLabel
 var power: = 1 setget set_power
 var color: = 0
 
+func _ready() -> void:
+	Events.connect("fall", self, "_on_Events_fall")
+	sprite.scale = Vector2(0, 0)
+
 func setup(_color: int, _power: int = 1) -> void:
 	color = _color
 	self.power = _power
-	sprite.scale = Vector2(0, 0)
 	paint()
 	appear()
 	update_label()
-	Events.connect("fall", self, "_on_Events_fall")
 
 func paint() -> void:
+	print(Env.Colors[color])
 	sprite.modulate = Env.Colors[color]
 	sprite.modulate.a = 1.0
 
@@ -54,6 +57,7 @@ func fall() -> void:
 	tween.start()
 
 func take_damage() -> void:
+	Events.emit_signal("screen_shake", 0.1)
 	self.power -= 1
 	update_label()
 	player.play("Damage")
@@ -67,13 +71,16 @@ func destroy() -> void:
 	var destroy_fx: = Util.instantiate(explosion)
 	destroy_fx.global_position = global_position + Vector2(8.0, 8.0)
 	Events.emit_signal("score")
+	Events.emit_signal("screen_shake", 0.3)
 	queue_free()
 
 func update_label() -> void:
 	power_label.text = power as String
 
 func set_power(value: int) -> void:
-	if value > MAX_POWER: return
+	if value > MAX_POWER:
+		value = MAX_POWER
+
 	power = value
 	if power <= 0: destroy()
 
