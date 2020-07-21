@@ -14,6 +14,7 @@ var color: = 0
 
 func setup(_color: int) -> void:
 	color = _color
+	sprite.scale = Vector2(0, 0)
 	paint()
 	appear()
 	Events.connect("fall", self, "_on_Events_fall")
@@ -65,4 +66,5 @@ func _on_Events_fall() -> void:
 
 func _on_Block_area_entered(area: Area2D) -> void:
 	area.queue_free()
-	call_deferred("take_damage")
+	if area.color == color:
+		call_deferred("take_damage")

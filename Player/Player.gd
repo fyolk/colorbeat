@@ -10,7 +10,8 @@ enum { LEFT, RIGHT }
 onready var shot_scene: = preload("res://Environment/Shot.tscn")
 
 # Nodes
-onready var tween: = $Tween
+onready var move_tween: = $MoveTween
+onready var color_tween: = $ColorTween
 onready var player: = $AnimationPlayer
 onready var sprite: = $Sprite
 onready var muzzle: = $Muzzle
@@ -39,7 +40,7 @@ func _process(delta: float) -> void:
 		swap_color(RIGHT)
 
 func move(dir: int) -> void:
-	if tween.is_active(): return
+	if move_tween.is_active(): return
 
 	match dir:
 		LEFT:
@@ -61,16 +62,16 @@ func animate_movement(dir: int):
 		position.y
 	)
 
-	tween.interpolate_property(
+	move_tween.interpolate_property(
 		self,
 		"position",
 		position,
 		destination,
-		0.1,
+		0.2,
 		Tween.TRANS_EXPO,
 		Tween.EASE_OUT
 	)
-	tween.start()
+	move_tween.start()
 
 func shoot() -> void:
 	player.play("ShootLeft" if hand == LEFT else "ShootRight")
@@ -87,7 +88,7 @@ func swap_color(dir: int) -> void:
 		next_color = (color + 1) if color < (TOTAL_COLORS - 1) else 0
 
 	color = next_color
-	tween.interpolate_property(
+	color_tween.interpolate_property(
 		sprite,
 		"modulate",
 		sprite.modulate,
@@ -96,4 +97,4 @@ func swap_color(dir: int) -> void:
 		Tween.TRANS_CUBIC,
 		Tween.EASE_IN_OUT
 	)
-	tween.start()
+	color_tween.start()

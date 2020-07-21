@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/barrier-block.png" type="Texture" id=1]
+[ext_resource path="res://Environment/Barriers.gd" type="Script" id=2]
+
+[node name="Barriers" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BarrierLeft" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 16, 16, 16, 192 )
+
+[node name="BarrierRight" type="Sprite" parent="."]
+position = Vector2( 208, 96 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -112, -96 )
+region_enabled = true
+region_rect = Rect2( 16, 16, 16, 192 )
+
+[node name="Tween" type="Tween" parent="."]
