@@ -5,10 +5,12 @@ onready var block_scene: = preload("res://Environment/Block.tscn")
 
 # Properties
 var offset: = 0.0
+var available_positions: = []
 
 func _ready() -> void:
 	randomize()
 	calc_offset()
+	update_available_positions()
 	Events.connect("lane_change", self, "_on_Events_lane_change")
 
 # Debug Spawn Area
@@ -23,14 +25,33 @@ func _ready() -> void:
 #	draw_rect(rect, Color.white, true)
 
 func spawn() -> void:
-	var blocks_to_spawn: = Env.BlockSpawn
-	var block: = Util.instantiate(block_scene, self)
-	var pos_x: = (randi() % Env.Lanes + 1) * Env.GRID_SIZE
-	block.position = Vector2(offset + pos_x, 0)
-	block.call_deferred("setup", randi() % 3)
+	randomize()
+	var blocks_instantiated: = []
+
+	while blocks_instantiated.size() < Env.BlockToSpawn:
+		var block: = Util.instantiate(block_scene, self)
+		var random_pos: Vector2 = Util.random_pick(available_positions)
+
+		if not blocks_instantiated.has(random_pos):
+			blocks_instantiated.append(random_pos)
+			block.position = random_pos
+			block.call_deferred(
+				"setup",
+				randi() % Env.Colors.size(),
+				randi() % Env.Power + 1
+			)
 
 func calc_offset() -> void:
 	offset = (Env.MAX_LANES - Env.Lanes) / 2 * Env.GRID_SIZE
 
+func update_available_positions() -> void:
+	available_positions.clear()
+	for i in range(Env.Lanes):
+		available_positions.append(Vector2(
+			(i + 1) * Env.GRID_SIZE + offset,
+			0.0
+		))
+
 func _on_Events_lane_change(lanes: int) -> void:
 	calc_offset()
+	update_available_positions()

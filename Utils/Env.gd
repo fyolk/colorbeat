@@ -9,7 +9,7 @@ const MAX_POWER: = 9
 # Game Properties
 var Lanes: = MIN_LANES setget set_lanes
 var Power: = 3 setget set_power
-var BlockSpawn: = 2
+var BlockToSpawn: = 1
 var MoveInterval: = 3.0
 
 # Enums

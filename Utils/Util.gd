@@ -9,3 +9,8 @@ func instantiate(scene: PackedScene, parent: Node = null) -> Node:
 	main.call_deferred("add_child", instance)
 
 	return instance
+
+func random_pick(options: Array):
+	randomize()
+
+	return options[randi() % options.size()]
