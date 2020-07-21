@@ -18,18 +18,19 @@ func _ready() -> void:
 #func _draw() -> void:
 #	var rect: = Rect2(
 #		Vector2(offset + Env.GRID_SIZE, 0.0),
-#		Vector2(Env.LANES * Env.GRID_SIZE, 8)
+#		Vector2(Env.Lanes * Env.GRID_SIZE, 8)
 #	)
 #	draw_rect(rect, Color.white, true)
 
 func spawn() -> void:
+	var blocks_to_spawn: = Env.BlockSpawn
 	var block: = Util.instantiate(block_scene, self)
-	var pos_x: = (randi() % Env.LANES + 1) * Env.GRID_SIZE
+	var pos_x: = (randi() % Env.Lanes + 1) * Env.GRID_SIZE
 	block.position = Vector2(offset + pos_x, 0)
 	block.call_deferred("setup", randi() % 3)
 
 func calc_offset() -> void:
-	offset = (Env.MAX_LANES - Env.LANES) / 2 * Env.GRID_SIZE
+	offset = (Env.MAX_LANES - Env.Lanes) / 2 * Env.GRID_SIZE
 
 func _on_Events_lane_change(lanes: int) -> void:
 	calc_offset()

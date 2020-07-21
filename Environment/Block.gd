@@ -1,5 +1,8 @@
 extends Area2D
 
+# Constants
+const MAX_POWER: = 9
+
 # PackedScenes
 onready var explosion: = preload("res://Environment/Effects/BlockBreak.tscn")
 
@@ -7,16 +10,19 @@ onready var explosion: = preload("res://Environment/Effects/BlockBreak.tscn")
 onready var sprite: = $Sprite
 onready var tween: = $Tween
 onready var player: = $AnimationPlayer
+onready var power_label: = $PowerLabel
 
 # Properties
-var health: = 3 setget set_health
+var power: = 1 setget set_power
 var color: = 0
 
-func setup(_color: int) -> void:
+func setup(_color: int, _power: int = 1) -> void:
 	color = _color
+	self.power = _power
 	sprite.scale = Vector2(0, 0)
 	paint()
 	appear()
+	update_label()
 	Events.connect("fall", self, "_on_Events_fall")
 
 func paint() -> void:
@@ -48,8 +54,14 @@ func fall() -> void:
 	tween.start()
 
 func take_damage() -> void:
-	self.health -= 1
+	self.power -= 1
+	update_label()
 	player.play("Damage")
+
+func gain_power() -> void:
+	self.power += 1
+	update_label()
+	player.play("Power")
 
 func destroy() -> void:
 	var destroy_fx: = Util.instantiate(explosion)
@@ -57,9 +69,13 @@ func destroy() -> void:
 	Events.emit_signal("score")
 	queue_free()
 
-func set_health(value: int) -> void:
-	health = value
-	if health <= 0: destroy()
+func update_label() -> void:
+	power_label.text = power as String
+
+func set_power(value: int) -> void:
+	if value > MAX_POWER: return
+	power = value
+	if power <= 0: destroy()
 
 func _on_Events_fall() -> void:
 	fall()
@@ -68,3 +84,5 @@ func _on_Block_area_entered(area: Area2D) -> void:
 	area.queue_free()
 	if area.color == color:
 		call_deferred("take_damage")
+	else:
+		call_deferred("gain_power")

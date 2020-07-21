@@ -8,7 +8,7 @@ var lanes: = 0
 
 func _ready() -> void:
 	Events.connect("lane_change", self, "_on_Events_lane_change")
-	lanes = Env.LANES
+	lanes = Env.Lanes
 
 func change_size(size: int) -> void:
 	var new_lanes: = size - lanes
