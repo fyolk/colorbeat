@@ -7,17 +7,17 @@
 script = ExtResource( 2 )
 
 [node name="BarrierLeft" type="Sprite" parent="."]
+position = Vector2( 0, -64 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 16, 16, 16, 192 )
+region_rect = Rect2( 16, 16, 16, 300 )
 
 [node name="BarrierRight" type="Sprite" parent="."]
-position = Vector2( 208, 96 )
+position = Vector2( 96, -64 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( -112, -96 )
 region_enabled = true
-region_rect = Rect2( 16, 16, 16, 192 )
+region_rect = Rect2( 16, 16, 16, 300 )
 
 [node name="Tween" type="Tween" parent="."]

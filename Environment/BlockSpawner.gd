@@ -55,6 +55,6 @@ func update_available_positions() -> void:
 			0.0
 		))
 
-func _on_Events_lane_change(_lanes: int) -> void:
+func _on_Events_lane_change() -> void:
 	calc_offset()
 	update_available_positions()

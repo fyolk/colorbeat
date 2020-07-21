@@ -10,12 +10,12 @@ func _ready() -> void:
 	Events.connect("lane_change", self, "_on_Events_lane_change")
 	lanes = Env.Lanes
 
-func change_size(size: int) -> void:
-	var new_lanes: = size - lanes
+func change_size() -> void:
+	var new_lanes: = Env.Lanes - lanes
 	var barrier_left_mod: = 0.0
 	var barrier_right_mod: = 0.0
 
-	lanes = size
+	lanes = Env.Lanes
 
 	for i in range(new_lanes):
 		if i % 2 == 0.0:
@@ -52,5 +52,5 @@ func change_size(size: int) -> void:
 	)
 	tween.start()
 
-func _on_Events_lane_change(lanes: int) -> void:
-	change_size(lanes)
+func _on_Events_lane_change() -> void:
+	change_size()

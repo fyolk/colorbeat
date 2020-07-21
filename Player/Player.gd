@@ -10,7 +10,6 @@ enum { LEFT, RIGHT }
 onready var shot_scene: = preload("res://Environment/Shot.tscn")
 
 # Nodes
-onready var move_tween: = $MoveTween
 onready var color_tween: = $ColorTween
 onready var player: = $AnimationPlayer
 onready var sprite: = $Sprite
@@ -19,8 +18,11 @@ onready var muzzle: = $Muzzle
 # Controls
 var hand: int = LEFT
 var color: int = Env.YELLOW
+var lane_boundaries: = Vector2.ZERO
 
 func _ready() -> void:
+	Events.connect("lane_change", self, "_on_Events_lane_change")
+	_calc_boundaries()
 	swap_color(RIGHT)
 
 func _process(delta: float) -> void:
@@ -40,8 +42,6 @@ func _process(delta: float) -> void:
 		swap_color(RIGHT)
 
 func move(dir: int) -> void:
-	if move_tween.is_active(): return
-
 	match dir:
 		LEFT:
 			player.play("MoveLeft")
@@ -52,15 +52,16 @@ func move(dir: int) -> void:
 			animate_movement(RIGHT)
 
 func animate_movement(dir: int):
+	var destination: = position
 	var modifier: = 0.0
+
 	match dir:
 		LEFT: modifier = -1.0
 		RIGHT: modifier = 1.0
-	
-	var destination: = Vector2(
-		position.x + (Env.GRID_SIZE * modifier),
-		position.y
-	)
+
+	destination.x += Env.GRID_SIZE * modifier
+	if destination.x < lane_boundaries.x or destination.x > lane_boundaries.y:
+		return
 
 	position = destination
 
@@ -89,3 +90,12 @@ func swap_color(dir: int) -> void:
 		Tween.EASE_IN_OUT
 	)
 	color_tween.start()
+
+func _calc_boundaries() -> void:
+	var max_pos: = Env.GRID_SIZE * Env.Lanes + Env.LaneOffset
+	var min_pos: = Env.LaneOffset + Env.GRID_SIZE
+	lane_boundaries = Vector2(min_pos, max_pos)
+	print(lane_boundaries)
+
+func _on_Events_lane_change() -> void:
+	_calc_boundaries()

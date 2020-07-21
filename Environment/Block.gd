@@ -28,7 +28,6 @@ func setup(_color: int, _power: int = 1) -> void:
 	update_label()
 
 func paint() -> void:
-	print(Env.Colors[color])
 	sprite.modulate = Env.Colors[color]
 	sprite.modulate.a = 1.0
 
@@ -93,3 +92,6 @@ func _on_Block_area_entered(area: Area2D) -> void:
 		call_deferred("take_damage")
 	else:
 		call_deferred("gain_power")
+
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	queue_free()
