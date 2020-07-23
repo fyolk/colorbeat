@@ -44,5 +44,6 @@ shape = SubResource( 2 )
 
 [node name="ShotSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -10.0
 autoplay = true
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

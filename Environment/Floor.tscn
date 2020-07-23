@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Shaders/floor.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/Sprites/block-floor.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+
+[node name="Floor" type="Sprite"]
+material = SubResource( 1 )
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 272, 180 )
