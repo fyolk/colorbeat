@@ -5,12 +5,14 @@ const MAX_POWER: = 9
 
 # PackedScenes
 onready var explosion: = preload("res://Environment/Effects/BlockBreak.tscn")
+onready var sfx_explosion: = preload("res://Environment/Effects/BassDropEffect.tscn")
 
 # Nodes
 onready var sprite: = $Sprite
 onready var tween: = $Tween
 onready var player: = $AnimationPlayer
 onready var power_label: = $Sprite/PowerLabel
+onready var sfx_hit: = $TakeHitSFX
 
 # Properties
 var power: = 1 setget set_power
@@ -60,6 +62,7 @@ func take_damage() -> void:
 	self.power -= 1
 	update_label()
 	player.play("Damage")
+	sfx_hit.play()
 
 func gain_power() -> void:
 	self.power += 1
@@ -67,6 +70,7 @@ func gain_power() -> void:
 	player.play("Power")
 
 func destroy() -> void:
+	Util.instantiate(sfx_explosion)
 	var destroy_fx: = Util.instantiate(explosion)
 	destroy_fx.global_position = global_position + Vector2(8.0, 8.0)
 	Events.emit_signal("score")

@@ -12,6 +12,7 @@ var Power: = 3 setget set_power
 var BlockToSpawn: = 1
 var MoveInterval: = 3.0
 var LaneOffset: = _get_offset()
+var Score: = 0
 
 # Enums
 enum { RED, GREEN, BLUE, YELLOW }

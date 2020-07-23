@@ -10,7 +10,7 @@ func _ready() -> void:
 	timer.wait_time = Env.MoveInterval
 #	Engine.time_scale = 0.5
 
-# Debug Dificulty
+# Debug Difficulty
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		Env.Lanes += 2
@@ -19,4 +19,5 @@ func _process(delta: float) -> void:
 
 func _on_Timer_timeout() -> void:
 	Events.emit_signal("fall")
+	yield(get_tree().create_timer(0.314), "timeout")
 	block_spawner.spawn()

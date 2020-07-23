@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ColorBeat_BassDropExplosion.ogg-11ae50936d6efee14c50142ad7d4e806.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/ColorBeat_BassDropExplosion.ogg"
+dest_files=[ "res://.import/ColorBeat_BassDropExplosion.ogg-11ae50936d6efee14c50142ad7d4e806.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/block-white.png" type="Texture" id=1]
 [ext_resource path="res://Environment/Block.gd" type="Script" id=2]
 [ext_resource path="res://Resources/DefaultFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/SFX/ColorBeat_hit.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
@@ -97,7 +98,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
@@ -108,5 +108,8 @@ anims/Power = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 8, 8 )
+
+[node name="TakeHitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="area_entered" from="." to="." method="_on_Block_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
