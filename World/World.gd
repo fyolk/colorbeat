@@ -10,7 +10,7 @@ func _ready() -> void:
 	timer.wait_time = Env.MoveInterval
 #	Engine.time_scale = 0.5
 
-# Debug Barriers
+# Debug Dificulty
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		Env.Lanes += 2

@@ -10,7 +10,7 @@ onready var explosion: = preload("res://Environment/Effects/BlockBreak.tscn")
 onready var sprite: = $Sprite
 onready var tween: = $Tween
 onready var player: = $AnimationPlayer
-onready var power_label: = $PowerLabel
+onready var power_label: = $Sprite/PowerLabel
 
 # Properties
 var power: = 1 setget set_power
@@ -71,6 +71,8 @@ func destroy() -> void:
 	destroy_fx.global_position = global_position + Vector2(8.0, 8.0)
 	Events.emit_signal("score")
 	Events.emit_signal("screen_shake", 0.3)
+	Events.emit_signal("shockwave", sprite.get_global_transform_with_canvas().origin)
+	Util.slow_motion(0.5, 0.5)
 	queue_free()
 
 func update_label() -> void:

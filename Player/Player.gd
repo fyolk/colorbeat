@@ -95,7 +95,6 @@ func _calc_boundaries() -> void:
 	var max_pos: = Env.GRID_SIZE * Env.Lanes + Env.LaneOffset
 	var min_pos: = Env.LaneOffset + Env.GRID_SIZE
 	lane_boundaries = Vector2(min_pos, max_pos)
-	print(lane_boundaries)
 
 func _on_Events_lane_change() -> void:
 	_calc_boundaries()

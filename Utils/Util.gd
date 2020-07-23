@@ -14,3 +14,8 @@ func random_pick(options: Array):
 	randomize()
 
 	return options[randi() % options.size()]
+
+func slow_motion(time: float, duration: float) -> void:
+	Engine.time_scale = time
+	yield(get_tree().create_timer(duration), "timeout")
+	Engine.time_scale = 1.0
