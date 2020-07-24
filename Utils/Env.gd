@@ -5,14 +5,18 @@ const GRID_SIZE: = 16
 const MAX_LANES: = 15
 const MIN_LANES: = 5
 const MAX_POWER: = 9
+const DEFAULT_MOVE_INTERVAL: = 3.0
+const DEFAULT_BLOCKS_TO_SPAWN: = 1
+const DEFAULT_POWER: = 3
 
 # Game Properties
 var Lanes: = MIN_LANES setget set_lanes
-var Power: = 3 setget set_power
-var BlockToSpawn: = 1
-var MoveInterval: = 3.0
+var Power: = DEFAULT_POWER setget set_power
+var BlocksToSpawn: = DEFAULT_BLOCKS_TO_SPAWN
+var MoveInterval: = DEFAULT_MOVE_INTERVAL
 var LaneOffset: = _get_offset()
 var Score: = 0
+var GameOver: = false
 
 # Enums
 enum { RED, GREEN, BLUE, YELLOW }
@@ -36,6 +40,15 @@ func set_power(value: int) -> void:
 	if value > MAX_POWER: return
 	
 	Power = value
+
+func reset() -> void:
+	Lanes = MIN_LANES
+	Power = DEFAULT_POWER
+	BlocksToSpawn = DEFAULT_BLOCKS_TO_SPAWN
+	MoveInterval = DEFAULT_MOVE_INTERVAL
+	LaneOffset = _get_offset()
+	Score = 0
+	GameOver = false
 
 func _get_offset() -> int:
 	return (MAX_LANES - Lanes) / 2 * GRID_SIZE

@@ -26,6 +26,8 @@ func _ready() -> void:
 	swap_color(RIGHT)
 
 func _process(delta: float) -> void:
+	if Env.GameOver: return
+
 	if Input.is_action_just_pressed("left"):
 		move(LEFT)
 	

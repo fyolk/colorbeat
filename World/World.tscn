@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://World/MainCamera.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://World/ShockWave.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/UI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Environment/Floor.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Environment/Deadline.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World/GameOver.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -34,10 +36,12 @@ stream = ExtResource( 3 )
 autoplay = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
+wait_time = 0.001
 
 [node name="Floor" parent="." instance=ExtResource( 9 )]
+
+[node name="Deadline" parent="." instance=ExtResource( 10 )]
+position = Vector2( 0, 144 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 128, 144 )
@@ -50,4 +54,6 @@ position = Vector2( 80, 0 )
 [node name="ShockWave" parent="." instance=ExtResource( 7 )]
 
 [node name="UI" parent="." instance=ExtResource( 8 )]
+
+[node name="GameOver" parent="." instance=ExtResource( 11 )]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

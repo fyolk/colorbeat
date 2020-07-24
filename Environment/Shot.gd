@@ -11,7 +11,7 @@ var color: int
 
 func setup(_color: int) -> void:
 	color = _color
-	sprite.modulate = Env.Colors[color]
+	sprite.modulate = Env.Colors[color] * 1.12
 
 func _process(delta: float) -> void:
 	position.y -= SPEED * delta

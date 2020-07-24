@@ -89,15 +89,19 @@ func set_power(value: int) -> void:
 	power = value
 	if power <= 0: destroy()
 
+func fade_out() -> void:
+	randomize()
+	yield(get_tree().create_timer(randf()), "timeout")
+	player.play("FadeOut")
+
 func _on_Events_fall() -> void:
 	fall()
 
 func _on_Block_area_entered(area: Area2D) -> void:
+	if not "color" in area: return
+
 	area.queue_free()
-	if area.color == color:
-		call_deferred("take_damage")
-	else:
-		call_deferred("gain_power")
+	call_deferred("take_damage" if area.color == color else "gain_power")
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()

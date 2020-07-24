@@ -28,7 +28,7 @@ func spawn() -> void:
 	randomize()
 	var blocks_instantiated: = []
 
-	while blocks_instantiated.size() < Env.BlockToSpawn:
+	while blocks_instantiated.size() < Env.BlocksToSpawn:
 		var random_pos: Vector2 = Util.random_pick(available_positions)
 
 		if not blocks_instantiated.has(random_pos):
