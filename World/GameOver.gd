@@ -5,6 +5,7 @@ onready var score: = $CenterContainer/VBoxContainer/ScoreLabel
 
 func _ready() -> void:
 	Events.connect("game_over", self, "_on_Events_game_over")
+	container.hide()
 
 func _on_Events_game_over() -> void:
 	score.text = "Score: %s" % str(Env.Score)
