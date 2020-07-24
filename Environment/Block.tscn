@@ -77,8 +77,8 @@ tracks/1/keys = {
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "queue_free"
+"args": [ "queue_free" ],
+"method": "call_deferred"
 } ]
 }
 

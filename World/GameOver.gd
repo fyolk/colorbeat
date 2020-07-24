@@ -4,7 +4,6 @@ onready var container: = $CenterContainer
 onready var score: = $CenterContainer/VBoxContainer/ScoreLabel
 
 func _ready() -> void:
-	container.hide()
 	Events.connect("game_over", self, "_on_Events_game_over")
 
 func _on_Events_game_over() -> void:
@@ -16,4 +15,4 @@ func _on_TryAgainButton_button_up() -> void:
 	get_tree().reload_current_scene()
 
 func _on_ExitButton_button_up() -> void:
-	get_tree().quit()
+	get_tree().change_scene("res://World/TitleScreen.tscn")
