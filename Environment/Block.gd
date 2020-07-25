@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Block
+
 # Constants
 const MAX_POWER: = 9
 
@@ -15,6 +17,7 @@ onready var power_label: = $Sprite/PowerLabel
 onready var sfx_hit: = $TakeHitSFX
 
 # Properties
+var type: = "common"
 var power: = 1 setget set_power
 var color: = 0
 

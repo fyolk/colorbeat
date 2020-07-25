@@ -22,4 +22,6 @@ func _on_Events_game_over() -> void:
 
 func _on_Events_level_up(current_level: int) -> void:
 	# warning-ignore:incompatible_ternary
-	level.text = "Level %s" % "MAX" if current_level == 11 else current_level
+	var str_level: = current_level as String
+	if str_level == "11": str_level = "MAX"
+	level.text = "Level %s" % str_level

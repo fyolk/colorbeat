@@ -1,7 +1,11 @@
 extends Position2D
 
+# Constants
+const POWER_CHANCE: = 0.01
+
 # PackedScenes
 onready var block_scene: = preload("res://Environment/Block.tscn")
+onready var block_power: = preload("res://Environment/PowerBlock.tscn")
 
 # Properties
 var offset: = 0.0
@@ -36,7 +40,8 @@ func spawn() -> void:
 			instantiate_block(random_pos)
 
 func instantiate_block(pos: Vector2) -> void:
-	var block: = Util.instantiate(block_scene, self)
+	var block_type: = block_power if randf() <= POWER_CHANCE else block_scene
+	var block: = Util.instantiate(block_type, self)
 	block.position = pos
 	block.call_deferred(
 		"setup",

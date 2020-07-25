@@ -13,13 +13,13 @@ func _ready() -> void:
 	Events.connect("game_over", self, "_on_Events_game_over")
 
 # Debug Difficulty
-func _process(delta: float) -> void:
-	if Env.GameOver: return
-
-	if Input.is_action_just_pressed("ui_accept"):
-		Env.Lanes += 2
-		Env.Power += 1
-		Env.BlocksToSpawn += 1
+#func _process(delta: float) -> void:
+#	if Env.GameOver: return
+#
+#	if Input.is_action_just_pressed("ui_accept"):
+#		Env.Lanes += 2
+#		Env.Power += 1
+#		Env.BlocksToSpawn += 1
 
 func remove_all_blocks() -> void:
 	var blocks: = get_tree().get_nodes_in_group("block")

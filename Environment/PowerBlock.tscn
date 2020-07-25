@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Environment/Block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/block-power.png" type="Texture" id=2]
+[ext_resource path="res://Environment/PowerBlock.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Animation" id=1]
+resource_name = "PowerBlock"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="PowerBlock" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 2 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 3
+
+[node name="PowerLabel" parent="Sprite" index="0"]
+text = ""
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "PowerBlock"
+anims/PowerBlock = SubResource( 1 )
