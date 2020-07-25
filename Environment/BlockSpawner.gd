@@ -1,7 +1,7 @@
 extends Position2D
 
 # Constants
-const POWER_CHANCE: = 0.01
+const POWER_CHANCE: = 0.015
 
 # PackedScenes
 onready var block_scene: = preload("res://Environment/Block.tscn")

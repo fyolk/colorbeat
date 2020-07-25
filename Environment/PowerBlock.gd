@@ -12,7 +12,7 @@ func setup(_color: int, _power: int = 1) -> void:
 	update_label()
 
 func paint() -> void:
-	sprite.modulate = Env.Colors[color] * 1.05
+	sprite.modulate = Env.Colors[color] * 1.5
 	sprite.modulate.a = 1.0
 
 func gain_power() -> void:
@@ -28,7 +28,7 @@ func destroy() -> void:
 		sprite.get_global_transform_with_canvas().origin,
 		"BiggerShockWave"
 	)
-	Util.slow_motion(0.4, 1.5)
+	Util.slow_motion(0.4, 0.8)
 	repaint_blocks()
 	queue_free()
 
