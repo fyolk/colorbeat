@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Color Beat"
+config/description="Color Beat is a colorful game where you'll need to think fast and wisely!"
 run/main_scene="res://World/TitleScreen.tscn"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://icon.png"
