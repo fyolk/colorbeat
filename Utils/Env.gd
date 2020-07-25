@@ -5,7 +5,7 @@ const GRID_SIZE: = 16
 const MAX_LANES: = 15
 const MIN_LANES: = 5
 const MAX_POWER: = 9
-const DEFAULT_MOVE_INTERVAL: = 0.5
+const DEFAULT_MOVE_INTERVAL: = 2.0
 const DEFAULT_BLOCKS_TO_SPAWN: = 1
 const DEFAULT_POWER: = 3
 
@@ -60,4 +60,5 @@ func reset() -> void:
 	GameOver = false
 
 func _get_offset() -> int:
+	# warning-ignore:integer_division
 	return (MAX_LANES - Lanes) / 2 * GRID_SIZE

@@ -45,6 +45,7 @@ func instantiate_block(pos: Vector2) -> void:
 	)
 
 func calc_offset() -> void:
+	# warning-ignore:integer_division
 	offset = (Env.MAX_LANES - Env.Lanes) / 2 * Env.GRID_SIZE
 
 func update_available_positions() -> void:

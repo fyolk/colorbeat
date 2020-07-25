@@ -25,6 +25,13 @@ Events="*res://Utils/Events.gd"
 Env="*res://Utils/Env.gd"
 Util="*res://Utils/Util.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=272

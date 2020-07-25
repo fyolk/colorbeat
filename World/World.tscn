@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://World/MainCamera.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Environment/Deadline.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/GameOver.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World/PauseMenu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/GameManager.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -59,4 +60,6 @@ position = Vector2( 80, 0 )
 [node name="PauseMenu" parent="." instance=ExtResource( 12 )]
 
 [node name="GameOver" parent="." instance=ExtResource( 11 )]
+
+[node name="GameManager" parent="." instance=ExtResource( 13 )]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
